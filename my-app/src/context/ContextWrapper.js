@@ -57,9 +57,13 @@ const ContextWrapper = (props) => {
     );
 
     // ここ書き足しました〜〜〜〜〜〜〜〜〜〜〜〜〜〜
+    const URL = process.env.NODE_ENV === "production"
+        ? "/training"
+        : "http://localhost:8080/training"
+
     useEffect(() => {
         const getInitialTraining = async () => {
-            const data = await fetch("http://localhost:8080/training")
+            const data = await fetch(URL /**"http://localhost:8080/training"*/)
                 .then((res) => res.json());
             localStorage.clear();
             data.map(e => dispatchCalEvent({ type: "push", payload: { ...e, day: Number(e.day) } }));

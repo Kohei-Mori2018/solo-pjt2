@@ -18,7 +18,13 @@ export const EventModal = () => {
     };
     console.log(calendarEvent);
     console.log(JSON.stringify(calendarEvent));
-    fetch("http://localhost:8080/training2", {
+
+    const URL =
+      process.env.NODE_ENV === "production"
+        ? "/training2"
+        : "http://localhost:8080/training2";
+
+    fetch(URL, {
       method: "POST",
       body: JSON.stringify(calendarEvent),
       headers: {
